@@ -1,0 +1,16 @@
+# Airflow
+airflow_env/
+logs/
+airflow.db
+airflow-webserver.pid
+webserver_config.py
+airflow.cfg
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Otros
+.env

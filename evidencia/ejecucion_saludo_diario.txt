@@ -1,0 +1,61 @@
+[[34m2026-01-16T20:55:30.723-0300[0m] {[34mdagbag.py:[0m545} INFO[0m - Filling up the DagBag from /home/vylo0/airflow_curso/dags[0m
+[[34m2026-01-16T20:55:30.801-0300[0m] {[34mexample_local_kubernetes_executor.py:[0m40} WARNING[0m - Could not import DAGs in example_local_kubernetes_executor.py[0m
+Traceback (most recent call last):
+  File "/home/vylo0/airflow_curso/airflow_env/lib/python3.12/site-packages/airflow/example_dags/example_local_kubernetes_executor.py", line 38, in <module>
+    from kubernetes.client import models as k8s
+ModuleNotFoundError: No module named 'kubernetes'
+[[34m2026-01-16T20:55:30.802-0300[0m] {[34mexample_local_kubernetes_executor.py:[0m41} WARNING[0m - Install Kubernetes dependencies with: pip install apache-airflow[cncf.kubernetes][0m
+[[34m2026-01-16T20:55:31.006-0300[0m] {[34mexample_kubernetes_executor.py:[0m39} WARNING[0m - The example_kubernetes_executor example DAG requires the kubernetes provider. Please install it with: pip install apache-airflow[cncf.kubernetes][0m
+[[34m2026-01-16T20:55:31.058-0300[0m] {[34mexample_python_operator.py:[0m93} WARNING[0m - The virtalenv_python example task requires virtualenv, please install it.[0m
+[[34m2026-01-16T20:55:31.116-0300[0m] {[34mexample_python_decorator.py:[0m80} WARNING[0m - The virtalenv_python example task requires virtualenv, please install it.[0m
+[[34m2026-01-16T20:55:31.242-0300[0m] {[34mtutorial_taskflow_api_virtualenv.py:[0m29} WARNING[0m - The tutorial_taskflow_api_virtualenv example DAG requires virtualenv, please install it.[0m
+[[34m2026-01-16T20:55:31.274-0300[0m] {[34mworkday.py:[0m41} WARNING[0m - Could not import pandas. Holidays will not be considered.[0m
+[[34m2026-01-16T20:55:31.295-0300[0m] {[34mdag.py:[0m4199} INFO[0m - dagrun id: saludo_diario[0m
+[[34m2026-01-16T20:55:31.305-0300[0m] {[34mdag.py:[0m4215} INFO[0m - created dagrun <DagRun saludo_diario @ 2024-01-01 00:00:00+00:00: manual__2024-01-01T00:00:00+00:00, state:running, queued_at: None. externally triggered: False>[0m
+[[34m2026-01-16T20:55:31.347-0300[0m] {[34mdag.py:[0m4161} INFO[0m - [DAG TEST] starting task_id=tarea_bash map_index=-1[0m
+[[34m2026-01-16T20:55:31.347-0300[0m] {[34mdag.py:[0m4164} INFO[0m - [DAG TEST] running task <TaskInstance: saludo_diario.tarea_bash manual__2024-01-01T00:00:00+00:00 [scheduled]>[0m
+[2026-01-16 20:55:31,407] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='saludo_diario' AIRFLOW_CTX_TASK_ID='tarea_bash' AIRFLOW_CTX_EXECUTION_DATE='2024-01-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-01-01T00:00:00+00:00'
+[[34m2026-01-16T20:55:31.407-0300[0m] {[34mtaskinstance.py:[0m2648} INFO[0m - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='saludo_diario' AIRFLOW_CTX_TASK_ID='tarea_bash' AIRFLOW_CTX_EXECUTION_DATE='2024-01-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-01-01T00:00:00+00:00'[0m
+[[34m2026-01-16T20:55:31.409-0300[0m] {[34mtaskinstance.py:[0m430} INFO[0m - ::endgroup::[0m
+[2026-01-16 20:55:31,410] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[[34m2026-01-16T20:55:31.410-0300[0m] {[34msubprocess.py:[0m63} INFO[0m - Tmp dir root location: /tmp[0m
+[2026-01-16 20:55:31,410] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'echo "Ejecutando tarea bash a las $(date)"']
+[[34m2026-01-16T20:55:31.410-0300[0m] {[34msubprocess.py:[0m75} INFO[0m - Running command: ['/usr/bin/bash', '-c', 'echo "Ejecutando tarea bash a las $(date)"'][0m
+[2026-01-16 20:55:31,417] {subprocess.py:86} INFO - Output:
+[[34m2026-01-16T20:55:31.417-0300[0m] {[34msubprocess.py:[0m86} INFO[0m - Output:[0m
+[2026-01-16 20:55:31,419] {subprocess.py:93} INFO - Ejecutando tarea bash a las Fri Jan 16 20:55:31 -03 2026
+[[34m2026-01-16T20:55:31.419-0300[0m] {[34msubprocess.py:[0m93} INFO[0m - Ejecutando tarea bash a las Fri Jan 16 20:55:31 -03 2026[0m
+[2026-01-16 20:55:31,420] {subprocess.py:97} INFO - Command exited with return code 0
+[[34m2026-01-16T20:55:31.420-0300[0m] {[34msubprocess.py:[0m97} INFO[0m - Command exited with return code 0[0m
+[[34m2026-01-16T20:55:31.420-0300[0m] {[34mtaskinstance.py:[0m441} INFO[0m - ::group::Post task execution logs[0m
+[[34m2026-01-16T20:55:31.439-0300[0m] {[34mtaskinstance.py:[0m1206} INFO[0m - Marking task as SUCCESS. dag_id=saludo_diario, task_id=tarea_bash, run_id=manual__2024-01-01T00:00:00+00:00, execution_date=20240101T000000, start_date=, end_date=20260116T235531[0m
+[[34m2026-01-16T20:55:31.456-0300[0m] {[34mdag.py:[0m4175} INFO[0m - [DAG TEST] end task task_id=tarea_bash map_index=-1[0m
+[[34m2026-01-16T20:55:31.477-0300[0m] {[34mdag.py:[0m4161} INFO[0m - [DAG TEST] starting task_id=tarea_python map_index=-1[0m
+[[34m2026-01-16T20:55:31.478-0300[0m] {[34mdag.py:[0m4164} INFO[0m - [DAG TEST] running task <TaskInstance: saludo_diario.tarea_python manual__2024-01-01T00:00:00+00:00 [scheduled]>[0m
+[2026-01-16 20:55:31,526] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='saludo_diario' AIRFLOW_CTX_TASK_ID='tarea_python' AIRFLOW_CTX_EXECUTION_DATE='2024-01-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-01-01T00:00:00+00:00'
+[[34m2026-01-16T20:55:31.526-0300[0m] {[34mtaskinstance.py:[0m2648} INFO[0m - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='saludo_diario' AIRFLOW_CTX_TASK_ID='tarea_python' AIRFLOW_CTX_EXECUTION_DATE='2024-01-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-01-01T00:00:00+00:00'[0m
+[[34m2026-01-16T20:55:31.527-0300[0m] {[34mtaskinstance.py:[0m430} INFO[0m - ::endgroup::[0m
+¡Hola desde Airflow!
+[2026-01-16 20:55:31,527] {python.py:237} INFO - Done. Returned value was: Saludo completado
+[[34m2026-01-16T20:55:31.527-0300[0m] {[34mpython.py:[0m237} INFO[0m - Done. Returned value was: Saludo completado[0m
+[[34m2026-01-16T20:55:31.528-0300[0m] {[34mtaskinstance.py:[0m441} INFO[0m - ::group::Post task execution logs[0m
+[[34m2026-01-16T20:55:31.540-0300[0m] {[34mtaskinstance.py:[0m1206} INFO[0m - Marking task as SUCCESS. dag_id=saludo_diario, task_id=tarea_python, run_id=manual__2024-01-01T00:00:00+00:00, execution_date=20240101T000000, start_date=, end_date=20260116T235531[0m
+[[34m2026-01-16T20:55:31.551-0300[0m] {[34mdag.py:[0m4175} INFO[0m - [DAG TEST] end task task_id=tarea_python map_index=-1[0m
+[[34m2026-01-16T20:55:31.566-0300[0m] {[34mdag.py:[0m4161} INFO[0m - [DAG TEST] starting task_id=tarea_esperar map_index=-1[0m
+[[34m2026-01-16T20:55:31.566-0300[0m] {[34mdag.py:[0m4164} INFO[0m - [DAG TEST] running task <TaskInstance: saludo_diario.tarea_esperar manual__2024-01-01T00:00:00+00:00 [scheduled]>[0m
+[2026-01-16 20:55:31,597] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='saludo_diario' AIRFLOW_CTX_TASK_ID='tarea_esperar' AIRFLOW_CTX_EXECUTION_DATE='2024-01-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-01-01T00:00:00+00:00'
+[[34m2026-01-16T20:55:31.597-0300[0m] {[34mtaskinstance.py:[0m2648} INFO[0m - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='saludo_diario' AIRFLOW_CTX_TASK_ID='tarea_esperar' AIRFLOW_CTX_EXECUTION_DATE='2024-01-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-01-01T00:00:00+00:00'[0m
+[[34m2026-01-16T20:55:31.597-0300[0m] {[34mtaskinstance.py:[0m430} INFO[0m - ::endgroup::[0m
+[2026-01-16 20:55:31,597] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[[34m2026-01-16T20:55:31.597-0300[0m] {[34msubprocess.py:[0m63} INFO[0m - Tmp dir root location: /tmp[0m
+[2026-01-16 20:55:31,598] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'sleep 5']
+[[34m2026-01-16T20:55:31.598-0300[0m] {[34msubprocess.py:[0m75} INFO[0m - Running command: ['/usr/bin/bash', '-c', 'sleep 5'][0m
+[2026-01-16 20:55:31,605] {subprocess.py:86} INFO - Output:
+[[34m2026-01-16T20:55:31.605-0300[0m] {[34msubprocess.py:[0m86} INFO[0m - Output:[0m
+[2026-01-16 20:55:36,607] {subprocess.py:97} INFO - Command exited with return code 0
+[[34m2026-01-16T20:55:36.607-0300[0m] {[34msubprocess.py:[0m97} INFO[0m - Command exited with return code 0[0m
+[[34m2026-01-16T20:55:36.607-0300[0m] {[34mtaskinstance.py:[0m441} INFO[0m - ::group::Post task execution logs[0m
+[[34m2026-01-16T20:55:36.624-0300[0m] {[34mtaskinstance.py:[0m1206} INFO[0m - Marking task as SUCCESS. dag_id=saludo_diario, task_id=tarea_esperar, run_id=manual__2024-01-01T00:00:00+00:00, execution_date=20240101T000000, start_date=20260116T235535, end_date=20260116T235536[0m
+[[34m2026-01-16T20:55:36.633-0300[0m] {[34mdag.py:[0m4175} INFO[0m - [DAG TEST] end task task_id=tarea_esperar map_index=-1[0m
+[[34m2026-01-16T20:55:36.635-0300[0m] {[34mdagrun.py:[0m850} INFO[0m - Marking run <DagRun saludo_diario @ 2024-01-01 00:00:00+00:00: manual__2024-01-01T00:00:00+00:00, state:running, queued_at: None. externally triggered: False> successful[0m
+[[34m2026-01-16T20:55:36.636-0300[0m] {[34mdagrun.py:[0m901} INFO[0m - DagRun Finished: dag_id=saludo_diario, execution_date=2024-01-01 00:00:00+00:00, run_id=manual__2024-01-01T00:00:00+00:00, run_start_date=2024-01-01 00:00:00+00:00, run_end_date=2026-01-16 23:55:36.636149+00:00, run_duration=64540536.636149, state=success, external_trigger=False, run_type=manual, data_interval_start=2023-12-31 00:00:00+00:00, data_interval_end=2024-01-01 00:00:00+00:00, dag_hash=None[0m
