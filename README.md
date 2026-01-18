@@ -324,6 +324,7 @@ Se utiliza un sensor cuando una tarea depende de un evento externo, como la lleg
 
 **¿Cuáles son las ventajas de crear operadores personalizados?**  
 Permiten encapsular lógica reutilizable, mantener los DAGs más ordenados, estandarizar procesos, facilitar el mantenimiento y escalar soluciones de orquestación de forma más profesional.
+
 ---
 
 ## Día 4 – Monitoreo, métricas y alertas en Airflow
@@ -383,9 +384,65 @@ Las alertas por correo se usan para notificaciones formales, Slack para alertas 
 
 ---
 
-## Días restantes (planificación)
+## Día 5 – DAG avanzado con branching y TaskGroups
 
-- Día 5
+### Objetivo del día
+
+- Implementar un DAG avanzado con patrones de diseño
+- Aplicar branching dinámico con `BranchPythonOperator`
+- Utilizar `TaskGroup` para organizar tareas complejas
+- Simular validación de calidad de datos
+- Analizar estados de ejecución (success, skipped)
+- Generar evidencia visual desde la UI de Airflow
+
+---
+
+### Trabajo realizado
+
+- Se creó el DAG `pipeline_avanzado_complejo`
+- Se implementó una tarea de validación de calidad de datos usando XCom
+- Se definió una lógica de decisión para enrutar el procesamiento
+- Se configuraron tres rutas de ejecución:
+  - Procesamiento rápido
+  - Procesamiento completo
+  - Procesamiento pesado mediante TaskGroup
+- Se unificaron las rutas en una tarea final
+- Se ejecutó el DAG desde la UI de Airflow
+- Se validó el comportamiento esperado de branching (tareas en estado *skipped*)
+- Se documentó la ejecución mediante capturas de pantalla
+
+---
+
+### Evidencia generada
+
+Las siguientes evidencias fueron almacenadas en la carpeta `evidencia/`:
+
+- `detalle_ejecucion_dia5.png`: detalle de la ejecución del DAG
+- `grafico_rapido_dia5.png`: ejecución de la ruta de procesamiento rápido
+- `grafico_completo_dia5.png`: ejecución de la ruta de procesamiento completo
+
+---
+
+### Observaciones
+
+- Las tareas que no pertenecen a la ruta seleccionada quedan en estado *skipped*, lo cual es el comportamiento correcto en DAGs con branching.
+- El uso de `TaskGroup` mejora la legibilidad y escalabilidad del DAG.
+- El pipeline queda preparado para pruebas automatizadas y CI/CD.
+
+---
+
+### Verificación – Día 5
+
+**¿Cuándo usarías SubDAGs vs TaskGroups?**
+
+- **TaskGroups** se utilizan cuando se desea agrupar tareas de forma lógica y visual dentro de un mismo DAG, manteniendo una ejecución simple y evitando complejidad adicional. Son la opción recomendada actualmente.
+- **SubDAGs** se usarían solo en casos muy específicos donde se requiere reutilizar un flujo completo como una unidad independiente, aunque hoy se consideran una mala práctica debido a problemas de rendimiento y mantenimiento.
+
+**¿Qué estrategias de escalado son más efectivas según el tipo de carga?**
+
+- Para cargas paralelizables: **paralelización horizontal**, dividiendo el trabajo en múltiples tareas.
+- Para recursos limitados: **uso de pools** para controlar concurrencia.
+- Para tareas pesadas o intensivas: **escalado vertical**, asignando workers con mayor capacidad de CPU, memoria o almacenamiento.
 
 ---
 
@@ -397,7 +454,8 @@ airflow_curso/
 │   ├── mi_primer_dag.py
 │   ├── pipeline_ventas_complejo.py
 │   ├── pipeline_con_sensores.py
-│   └── pipeline_monitorado.py
+│   ├── pipeline_monitorado.py
+│   └── pipeline_avanzado_complejo.py
 ├── evidencia/
 │   ├── ejecucion_saludo_diario.txt
 │   ├── detalle_ejecucion_dia1.png
@@ -409,7 +467,10 @@ airflow_curso/
 │   ├── grafico_dia3.png
 │   ├── detalle_ejecucion_dia4.png
 │   ├── grafico_intento_aviso_dia4.png
-│   └── grafico_completado_dia4.png
+│   ├── grafico_completado_dia4.png
+│   ├── detalle_ejecucion_dia5.png
+│   ├── grafico_rapido_dia5.png
+│   └── grafico_completo_dia5.png
 ├── .gitignore
 └── README.md
 ```
