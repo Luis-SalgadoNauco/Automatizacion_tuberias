@@ -326,9 +326,65 @@ Se utiliza un sensor cuando una tarea depende de un evento externo, como la lleg
 Permiten encapsular lógica reutilizable, mantener los DAGs más ordenados, estandarizar procesos, facilitar el mantenimiento y escalar soluciones de orquestación de forma más profesional.
 ---
 
+## Día 4 – Monitoreo, métricas y alertas en Airflow
+
+### Objetivo
+Implementar un DAG con monitoreo completo, métricas, validaciones, alertas y control de SLA utilizando Apache Airflow.
+
+---
+
+### Actividades realizadas
+
+- Creación del DAG `pipeline_monitorado`
+- Configuración de parámetros de monitoreo:
+  - Reintentos automáticos
+  - Timeout de ejecución
+  - Callbacks de éxito y fallo
+- Implementación de métricas:
+  - Tiempo de procesamiento
+  - Registros procesados
+  - Tasa de éxito
+- Uso de XCom para compartir métricas entre tareas
+- Validación de umbrales de calidad
+- Notificación de éxito mediante `EmailOperator`
+- Verificación de SLA al final del pipeline
+
+---
+
+### Ejecución y monitoreo
+
+- Las tareas `procesar_datos` y `validar_metricas` se ejecutaron correctamente.
+- La tarea `notificar_exito` intentó enviar un correo electrónico.
+- Debido a que el entorno local no tiene SMTP configurado, el envío de correo no se completó automáticamente.
+- La tarea fue marcada manualmente como exitosa para continuar el flujo.
+- El DAG finalizó exitosamente y permitió validar el monitoreo completo.
+
+---
+
+### Evidencias generadas
+
+- `detalle_ejecucion_dia4.png`  
+  Vista detallada de la ejecución del DAG.
+
+- `grafico_intento_aviso_dia4.png`  
+  Evidencia del intento de notificación por correo electrónico.
+
+- `grafico_completado_dia4.png`  
+  Ejecución final del DAG completado correctamente.
+
+---
+
+### Pregunta de verificación
+
+**¿Qué métricas son más importantes para monitorear en una tubería de datos y cómo elegir el tipo de alerta?**
+
+Las métricas más importantes son el estado de las tareas, tiempo de ejecución, volumen de datos procesados, tasa de éxito y cumplimiento de SLA.  
+Las alertas por correo se usan para notificaciones formales, Slack para alertas operativas en tiempo real y SMS para incidentes críticos.
+
+---
+
 ## Días restantes (planificación)
 
-- Día 4
 - Día 5
 
 ---
@@ -340,7 +396,8 @@ airflow_curso/
 ├── dags/
 │   ├── mi_primer_dag.py
 │   ├── pipeline_ventas_complejo.py
-│   └── pipeline_con_sensores.py
+│   ├── pipeline_con_sensores.py
+│   └── pipeline_monitorado.py
 ├── evidencia/
 │   ├── ejecucion_saludo_diario.txt
 │   ├── detalle_ejecucion_dia1.png
@@ -349,7 +406,10 @@ airflow_curso/
 │   ├── detalle_ejecucion_dia2.png
 │   ├── grafico_dia2.png
 │   ├── detalle_ejecucion_dia3.png
-│   └── grafico_dia3.png
+│   ├── grafico_dia3.png
+│   ├── detalle_ejecucion_dia4.png
+│   ├── grafico_intento_aviso_dia4.png
+│   └── grafico_completado_dia4.png
 ├── .gitignore
 └── README.md
 ```
