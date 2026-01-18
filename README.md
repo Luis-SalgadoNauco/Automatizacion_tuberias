@@ -178,9 +178,156 @@ BashOperator es ideal para comandos del sistema, scripts o tareas simples de inf
 - Reduce errores por ejecución fuera de orden
 ---
 
+## 📘 Día 3 – Operadores, Sensores y Operadores Personalizados
+
+### Objetivo del día
+
+- Conocer los operadores más comunes de Apache Airflow
+- Comprender el uso de sensores para esperar condiciones externas
+- Crear y utilizar un operador personalizado
+- Construir un DAG que combine sensores, operadores estándar y personalizados
+- Verificar la ejecución correcta desde la UI y la consola
+- Generar evidencia gráfica de la ejecución
+
+---
+
+### Trabajo realizado
+
+Durante el Día 3 se realizaron las siguientes actividades:
+
+- Revisión de operadores comunes:
+  - `BashOperator`
+  - `PythonOperator`
+- Introducción y uso de sensores:
+  - `FileSensor` para esperar la llegada de archivos
+- Creación de un operador personalizado para validación de datos
+- Construcción del DAG **`pipeline_con_sensores`**
+- Ejecución manual del DAG desde la consola
+- Monitoreo del flujo de tareas desde la Web UI
+- Análisis de estados y resolución de errores durante la ejecución
+- Generación de evidencia visual del DAG ejecutado correctamente
+
+---
+
+### DAG creado
+
+**Nombre:** `pipeline_con_sensores`
+
+**Descripción:**  
+Pipeline que espera la llegada de un archivo de ventas, valida su calidad, procesa la información, genera un reporte y finalmente limpia los archivos temporales.
+
+---
+
+### Tareas incluidas
+
+1. **`esperar_archivo_datos`** (`FileSensor`)  
+   Espera la existencia del archivo `/tmp/datos_ventas.csv` antes de continuar el flujo.
+
+2. **`validar_datos_ventas`** (Operador personalizado)  
+   Lee el archivo CSV y valida la calidad de los datos según un umbral definido.
+
+3. **`procesar_datos_ventas`** (`PythonOperator`)  
+   Simula el procesamiento de los datos de ventas.
+
+4. **`generar_reporte`** (`PythonOperator`)  
+   Simula la generación de un reporte ejecutivo.
+
+5. **`limpiar_archivos`** (`BashOperator`)  
+   Elimina el archivo temporal utilizado en el proceso.
+
+El flujo del DAG es **secuencial**:
+
+## 📘 Día 3 – Operadores, Sensores y Operadores Personalizados
+
+### Objetivo del día
+
+- Conocer los operadores más comunes de Apache Airflow
+- Comprender el uso de sensores para esperar condiciones externas
+- Crear y utilizar un operador personalizado
+- Construir un DAG que combine sensores, operadores estándar y personalizados
+- Verificar la ejecución correcta desde la UI y la consola
+- Generar evidencia gráfica de la ejecución
+
+---
+
+### Trabajo realizado
+
+Durante el Día 3 se realizaron las siguientes actividades:
+
+- Revisión de operadores comunes:
+  - `BashOperator`
+  - `PythonOperator`
+- Introducción y uso de sensores:
+  - `FileSensor` para esperar la llegada de archivos
+- Creación de un operador personalizado para validación de datos
+- Construcción del DAG **`pipeline_con_sensores`**
+- Ejecución manual del DAG desde la consola
+- Monitoreo del flujo de tareas desde la Web UI
+- Análisis de estados y resolución de errores durante la ejecución
+- Generación de evidencia visual del DAG ejecutado correctamente
+
+---
+
+### DAG creado
+
+**Nombre:** `pipeline_con_sensores`
+
+**Descripción:**  
+Pipeline que espera la llegada de un archivo de ventas, valida su calidad, procesa la información, genera un reporte y finalmente limpia los archivos temporales.
+
+---
+
+### Tareas incluidas
+
+1. **`esperar_archivo_datos`** (`FileSensor`)  
+   Espera la existencia del archivo `/tmp/datos_ventas.csv` antes de continuar el flujo.
+
+2. **`validar_datos_ventas`** (Operador personalizado)  
+   Lee el archivo CSV y valida la calidad de los datos según un umbral definido.
+
+3. **`procesar_datos_ventas`** (`PythonOperator`)  
+   Simula el procesamiento de los datos de ventas.
+
+4. **`generar_reporte`** (`PythonOperator`)  
+   Simula la generación de un reporte ejecutivo.
+
+5. **`limpiar_archivos`** (`BashOperator`)  
+   Elimina el archivo temporal utilizado en el proceso.
+
+El flujo del DAG es **secuencial**:
+
+esperar_archivo_datos → validar_datos_ventas → procesar_datos_ventas → generar_reporte → limpiar_archivos
+
+### Evidencia de ejecución
+
+Las evidencias del Día 3 se encuentran en la carpeta `evidencia/` e incluyen:
+
+- `detalle_ejecucion_dia3.png` – Detalle de ejecución de tareas
+- `grafico_dia3.png` – Vista gráfica del DAG ejecutado correctamente
+
+---
+
+### Aprendizajes clave
+
+- Los sensores permiten sincronizar los DAGs con eventos externos.
+- Un DAG no debe ejecutar tareas si no se cumplen las condiciones previas.
+- Los operadores personalizados mejoran la reutilización y limpieza del código.
+- Airflow gestiona estados de tareas de forma independiente al resultado del scheduler.
+- La Web UI es clave para depurar y entender la ejecución de pipelines.
+
+---
+
+### Verificación – Día 3
+
+**¿En qué situaciones usarías un sensor en lugar de ejecutar tareas inmediatamente?**  
+Se utiliza un sensor cuando una tarea depende de un evento externo, como la llegada de un archivo, la disponibilidad de un servicio o la finalización de otro proceso. Esto evita fallos prematuros y permite que el flujo se ejecute solo cuando las condiciones son correctas.
+
+**¿Cuáles son las ventajas de crear operadores personalizados?**  
+Permiten encapsular lógica reutilizable, mantener los DAGs más ordenados, estandarizar procesos, facilitar el mantenimiento y escalar soluciones de orquestación de forma más profesional.
+---
+
 ## Días restantes (planificación)
 
-- Día 3
 - Día 4
 - Día 5
 
@@ -192,13 +339,17 @@ BashOperator es ideal para comandos del sistema, scripts o tareas simples de inf
 airflow_curso/
 ├── dags/
 │   ├── mi_primer_dag.py
-│   └── pipeline_ventas_complejo.py
+│   ├── pipeline_ventas_complejo.py
+│   └── pipeline_con_sensores.py
 ├── evidencia/
 │   ├── ejecucion_saludo_diario.txt
 │   ├── detalle_ejecucion_dia1.png
 │   ├── grafico_dia1.png
 │   ├── ejecucion_pipeline_ventas_complejo.txt
 │   ├── detalle_ejecucion_dia2.png
-│   └── grafico_dia2.png
+│   ├── grafico_dia2.png
+│   ├── detalle_ejecucion_dia3.png
+│   └── grafico_dia3.png
 ├── .gitignore
 └── README.md
+```
