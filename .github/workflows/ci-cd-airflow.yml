@@ -15,27 +15,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout código
+        uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: Configurar Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Install dependencies
-  run: |
-    pip install --upgrade pip
-    pip install "apache-airflow==${{ env.AIRFLOW_VERSION }}" \
-      --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${{ env.AIRFLOW_VERSION }}/constraints-${{ env.PYTHON_VERSION }}.txt"
-    pip install pytest pytest-cov
+      - name: Instalar dependencias
+        run: |
+          pip install --upgrade pip
+          pip install "apache-airflow==${{ env.AIRFLOW_VERSION }}" \
+            --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${{ env.AIRFLOW_VERSION }}/constraints-${{ env.PYTHON_VERSION }}.txt"
+          pip install pytest pytest-cov
 
-      - name: Test DAG syntax
+      - name: Testear sintaxis de DAGs
         run: |
           python - << 'EOF'
           from airflow.models import DagBag
           dagbag = DagBag(include_examples=False)
           if dagbag.import_errors:
-              print("❌ DAG ERRORS:", dagbag.import_errors)
+              print("❌ Errores en DAGs:", dagbag.import_errors)
               exit(1)
           print(f"✅ {len(dagbag.dags)} DAGs cargados correctamente")
           EOF
+
+      - name: Ejecutar pruebas de DAGs
+        run: |
+          pytest tests/dags -v
