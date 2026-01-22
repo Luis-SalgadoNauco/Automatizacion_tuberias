@@ -1,0 +1,39 @@
+name: Airflow CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  AIRFLOW_VERSION: 2.7.0
+  PYTHON_VERSION: '3.9'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          pip install apache-airflow==${{ env.AIRFLOW_VERSION }}
+          pip install pytest pytest-cov
+
+      - name: Test DAG syntax
+        run: |
+          python - << 'EOF'
+          from airflow.models import DagBag
+          dagbag = DagBag(include_examples=False)
+          if dagbag.import_errors:
+              print("❌ DAG ERRORS:", dagbag.import_errors)
+              exit(1)
+          print(f"✅ {len(dagbag.dags)} DAGs cargados correctamente")
+          EOF
