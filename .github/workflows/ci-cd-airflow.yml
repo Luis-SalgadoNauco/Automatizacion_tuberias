@@ -23,9 +23,11 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
-        run: |
-          pip install apache-airflow==${{ env.AIRFLOW_VERSION }}
-          pip install pytest pytest-cov
+  run: |
+    pip install --upgrade pip
+    pip install "apache-airflow==${{ env.AIRFLOW_VERSION }}" \
+      --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${{ env.AIRFLOW_VERSION }}/constraints-${{ env.PYTHON_VERSION }}.txt"
+    pip install pytest pytest-cov
 
       - name: Test DAG syntax
         run: |
