@@ -9,13 +9,22 @@ def test_estructura_pipeline_ventas():
         include_examples=False
     )
 
-    # ⚠️ NUNCA get_dag() en CI
     dag = dagbag.dags.get("pipeline_ventas_complejo")
 
     assert dag is not None, "El DAG pipeline_ventas_complejo no existe"
 
-    task_ids = [task.task_id for task in dag.tasks]
+    task_ids = {task.task_id for task in dag.tasks}
 
-    assert "extraer_datos" in task_ids
-    assert "transformar_datos" in task_ids
-    assert "cargar_datos" in task_ids
+    # 🔎 Tareas clave reales del pipeline
+    tareas_esperadas = {
+        "preparar_entorno",
+        "extraer_api_ventas",
+        "extraer_db_productos",
+        "validar_datos_api",
+        "validar_datos_db",
+        "transformar_ventas",
+        "cargar_ventas"
+    }
+
+    faltantes = tareas_esperadas - task_ids
+    assert not faltantes, f"Tareas faltantes en el DAG: {faltantes}"
