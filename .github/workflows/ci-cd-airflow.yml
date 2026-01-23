@@ -1,4 +1,4 @@
-name: Airflow CI/CD Pipeline
+name: CI Airflow DAGs
 
 on:
   push:
@@ -28,19 +28,31 @@ jobs:
           pip install --upgrade pip
           pip install "apache-airflow==${{ env.AIRFLOW_VERSION }}" \
             --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${{ env.AIRFLOW_VERSION }}/constraints-${{ env.PYTHON_VERSION }}.txt"
-          pip install pytest pytest-cov
+          pip install pandas pytest pytest-cov
 
-      - name: Testear sintaxis de DAGs
+      - name: Validar carga de DAGs
+        env:
+          AIRFLOW_HOME: ${{ github.workspace }}/.airflow
+          AIRFLOW__CORE__DAGS_FOLDER: ${{ github.workspace }}/dags
         run: |
           python - << 'EOF'
           from airflow.models import DagBag
+
           dagbag = DagBag(include_examples=False)
+
           if dagbag.import_errors:
-              print("❌ Errores en DAGs:", dagbag.import_errors)
+              print("❌ Errores de importación:")
+              for dag, err in dagbag.import_errors.items():
+                  print(dag, err)
               exit(1)
+
+          assert len(dagbag.dags) > 0, "❌ No se cargó ningún DAG"
           print(f"✅ {len(dagbag.dags)} DAGs cargados correctamente")
           EOF
 
-      - name: Ejecutar pruebas de DAGs
+      - name: Ejecutar tests de DAGs
+        env:
+          AIRFLOW_HOME: ${{ github.workspace }}/.airflow
+          AIRFLOW__CORE__DAGS_FOLDER: ${{ github.workspace }}/dags
         run: |
           pytest tests/dags -v

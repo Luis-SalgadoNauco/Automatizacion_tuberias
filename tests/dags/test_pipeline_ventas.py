@@ -9,7 +9,8 @@ def test_estructura_pipeline_ventas():
         include_examples=False
     )
 
-    dag = dagbag.get_dag("pipeline_ventas_complejo")
+    # ⚠️ NUNCA get_dag() en CI
+    dag = dagbag.dags.get("pipeline_ventas_complejo")
 
     assert dag is not None, "El DAG pipeline_ventas_complejo no existe"
 
