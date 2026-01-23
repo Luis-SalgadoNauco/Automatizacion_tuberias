@@ -42,7 +42,7 @@ Se introduce el uso de **pytest** junto con **DagBag**, permitiendo integrar tes
 
 ---
 
-## 🛠️rabajo realizado
+## 🛠️Trabajo realizado
 
 Durante el Día 1 se realizaron las siguientes actividades:
 
@@ -71,22 +71,37 @@ Las evidencias correspondientes se encuentran almacenadas en la carpeta `evidenc
 
 ## Verificación – Día 1
 
-### ¿Por qué es importante testear DAGs en Airflow?
+### ¿Qué diferencias hay entre CI/CD para aplicaciones web vs pipelines de datos?
 
-Porque permite detectar errores de importación, dependencias incorrectas o configuraciones inválidas **antes de ejecutar los pipelines**, evitando fallos en producción y mejorando la confiabilidad del sistema.
+En aplicaciones web, los flujos de CI/CD suelen centrarse en:
+
+- Pruebas unitarias y de integración del código
+- Construcción del artefacto de la aplicación
+- Despliegue automático a entornos de prueba o producción
+- Validación de endpoints, interfaces y rendimiento
+
+En cambio, en pipelines de datos con Apache Airflow:
+
+- No se ejecuta el pipeline completo durante el proceso de CI
+- Se valida principalmente la estructura del DAG, su sintaxis y dependencias
+- Se comprueba que las tareas estén correctamente definidas
+- Se evita interactuar con sistemas externos reales (APIs, bases de datos)
+
+El objetivo del CI/CD en pipelines de datos es detectar errores de orquestación antes de que el DAG llegue a producción, reduciendo fallos durante la ejecución programada.
 
 ---
 
-### ¿Qué es DagBag y para qué se utiliza?
+### ¿Cómo asegurar que las pruebas de DAG sean rápidas y confiables?
 
-`DagBag` es el componente de Apache Airflow encargado de cargar y validar los DAGs disponibles.  
-Se utiliza para identificar errores de importación, problemas de sintaxis y configuraciones inválidas sin necesidad de ejecutar los flujos.
+Para asegurar pruebas rápidas y confiables en Apache Airflow se aplican las siguientes prácticas:
 
----
+- Uso de DagBag para cargar y validar DAGs sin ejecutarlos
+- Evitar dependencias externas durante las pruebas
+- Validar únicamente estructura, dependencias y configuración
+- Mantener los tests simples, deterministas y reproducibles
+- Ejecutar las pruebas en entornos aislados dentro del pipeline de CI
 
-### ¿Qué ventaja aporta pytest en Airflow?
-
-`pytest` permite automatizar la validación de DAGs, integrar pruebas en pipelines de CI/CD y asegurar la calidad del código mediante ejecuciones repetibles y controladas.
+Estas prácticas permiten detectar errores críticos en pocos segundos y garantizar la estabilidad del entorno productivo.
 
 ---
 
@@ -94,14 +109,22 @@ Se utiliza para identificar errores de importación, problemas de sintaxis y con
 
 airflow_curso/
 ├── dags/
-│ ├── mi_primer_dag.py
-│ ├── pipeline_ventas_complejo.py
-│ └── otros DAGs
+│   ├── mi_primer_dag.py
+│   ├── pipeline_ventas_complejo.py
+│   ├── pipeline_con_sensores.py
+│   ├── pipeline_monitorado.py
+│   └── pipeline_avanzado_complejo.py
 ├── tests/
-│ └── dags/
-│ └── test_carga_dags.py
+│   └── dags/
+│       ├── test_dag_sintaxis.py
+│       └── test_pipeline_ventas.py
+├── scripts/
+│   └── deploy.sh
+├── .github/
+│   └── workflows/
+│       └── ci-cd-airflow.yml
 ├── evidencia/
-│ └── evidencias_dia1.png
 ├── airflow_env/
 ├── airflow.cfg
-└── README.md
+├── README.md
+└── README_SEMANA_4.md
