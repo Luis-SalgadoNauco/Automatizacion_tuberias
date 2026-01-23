@@ -105,7 +105,7 @@ Estas prácticas permiten detectar errores críticos en pocos segundos y garanti
 
 ---
 
-## Estructura del proyecto (Día 1)
+## Estructura del proyecto
 
 airflow_curso/
 ├── dags/
