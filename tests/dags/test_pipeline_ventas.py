@@ -1,6 +1,7 @@
 import os
 from airflow.models import DagBag
 
+
 def test_estructura_pipeline_ventas():
     dags_path = os.path.join(os.getcwd(), "dags")
 
@@ -10,12 +11,11 @@ def test_estructura_pipeline_ventas():
     )
 
     dag = dagbag.dags.get("pipeline_ventas_complejo")
-
     assert dag is not None, "El DAG pipeline_ventas_complejo no existe"
 
     task_ids = {task.task_id for task in dag.tasks}
 
-    # 🔎 Tareas clave reales del pipeline
+    # 🔎 Tareas críticas que NO pueden faltar
     tareas_esperadas = {
         "preparar_entorno",
         "extraer_api_ventas",
@@ -23,7 +23,10 @@ def test_estructura_pipeline_ventas():
         "validar_datos_api",
         "validar_datos_db",
         "transformar_ventas",
-        "cargar_ventas"
+        "transformar_productos",
+        "join_ventas_productos",
+        "cargar_data_warehouse",
+        "enviar_reporte_ejecucion",
     }
 
     faltantes = tareas_esperadas - task_ids
