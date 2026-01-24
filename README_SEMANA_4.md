@@ -267,13 +267,135 @@ Una buena práctica es:
 Este enfoque reduce la fatiga de alertas y garantiza que las alertas críticas representen incidentes reales que requieren intervención humana.
 ---
 
+## Día 3 – Gestión de Incidentes y Respuesta Operacional en Tuberías de Datos
+
+### Objetivo del día
+Identificar, responder y documentar incidentes comunes en tuberías de datos mediante prácticas reales de operación on-call, utilizando runbooks automatizados, recuperación controlada y post-mortems estructurados.
+
+---
+
+## Tarea 1: Tipos de Incidentes Comunes
+
+Durante la operación de una tubería de datos, los incidentes más frecuentes se agrupan en las siguientes categorías:
+
+### 1. Fallos de conectividad
+- APIs caídas o no disponibles
+- Bases de datos inaccesibles
+- Timeouts de red
+- Límites de rate limit alcanzados
+- Problemas de autenticación o credenciales vencidas
+
+### 2. Problemas de datos
+- Datos corruptos o con formato inválido
+- Cambios inesperados en esquemas
+- Volúmenes de datos que exceden la capacidad del sistema
+
+### 3. Problemas de recursos
+- Uso excesivo de memoria o CPU
+- Disco lleno o límites de almacenamiento alcanzados
+- Contención de recursos entre múltiples pipelines
+
+### 4. Errores lógicos
+- Errores en el código de transformación
+- Dependencias circulares en DAGs
+- Configuraciones incorrectas
+
+---
+
+## Tarea 2: Estrategias de Recuperación – Runbook de Incidentes
+
+Se implementó un **runbook automatizado** para manejar incidentes de forma estructurada.
+
+### Paso 1: Detección automática
+Las alertas disparan el runbook cuando se cumplen condiciones como:
+- Pipeline caído
+- Violaciones de SLA
+- Alta tasa de errores
+- Datos desactualizados
+
+### Paso 2: Diagnóstico rápido
+El diagnóstico se realiza según el tipo de incidente:
+- Verificación del scheduler de Airflow
+- Revisión de conectividad a la base de datos
+- Análisis de uso de CPU y memoria
+
+### Paso 3: Recuperación automática
+Dependiendo del diagnóstico, se ejecutan acciones como:
+- Reinicio de servicios
+- Escalado de recursos
+- Rollback a checkpoints de datos
+- Renovación de credenciales
+
+Si la recuperación automática falla, el incidente se escala según su severidad.
+
+---
+
+## imulación de Incidente
+
+Se simuló un incidente de tipo **`pipeline_down`**, ejecutando automáticamente:
+
+- Verificación del scheduler de Airflow
+- Chequeo de conectividad a base de datos
+- Reinicio de servicios afectados
+- Validación de recuperación del pipeline
+
+Resultado:
+- Incidente resuelto automáticamente
+- Severidad: **CRITICAL**
+- Todos los pasos del runbook ejecutados con éxito
+
+---
+
+## Tarea 3: Post-Mortem y Mejora Continua
+
+Se generó un **post-mortem automático** en formato Markdown como evidencia del incidente.
+
+### Contenido del post-mortem
+- Executive Summary
+- Timeline del incidente
+- Impacto en usuarios y negocio
+- Análisis de causa raíz
+- Pasos de resolución
+- Lecciones aprendidas
+- Acciones correctivas
+- Medidas de prevención
+
+### Evidencia
+- Archivo generado: `post_mortem_pipeline_down.md`
+- Incluido en el repositorio como documentación formal del incidente
+
+---
+
+## Preguntas de verificación (Cierre del día)
+
+**1. ¿Cuál es la diferencia entre un incidente de datos y uno de infraestructura?**
+Un incidente de datos afecta la calidad, integridad o frescura de la información, mientras que uno de infraestructura impacta la disponibilidad o rendimiento de los sistemas.
+
+**2. ¿Por qué es clave contar con runbooks automatizados?**
+Porque reducen el MTTR, evitan errores humanos, estandarizan la respuesta y previenen escaladas innecesarias.
+
+**3. ¿Qué valor aporta un post-mortem en una organización de datos?**
+Permite aprender del incidente, identificar causas raíz, definir acciones correctivas y mejorar la resiliencia del sistema a futuro.
+
+---
+
 ## Estructura del proyecto
+```text
+## Estructura del Proyecto
+
+```text
 airflow_curso/
+├── README_SEMANA_4.md
+├── runbook.py
+├── post_mortem_pipeline_down.md
 ├── dags/
-├── tests/
-├── scripts/
-├── evidencia/
-├── airflow_env/
-├── airflow.cfg
-├── README.md
-└── README_SEMANA_4.md
+│   └── pipeline_monitoring_demo.py
+├── test/
+│   └── dags/
+│       ├── test_dag_sintaxis.py
+│       └── test_pipeline_ventas.py
+├── evidencia_semana4/
+│   ├── alertas_canalizacion_dia2.png
+│   ├── DashBoard_dia2.png
+│   └── Diagrama_ejecucion_dia2.png
+└── .gitignore
