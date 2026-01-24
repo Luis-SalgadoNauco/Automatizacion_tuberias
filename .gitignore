@@ -1,16 +1,39 @@
-# Airflow
-airflow_env/
-logs/
-airflow.db
-airflow-webserver.pid
-webserver_config.py
-airflow.cfg
-
-# Python
+########################
+# Semana 2 – Python
+########################
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-
-# Otros
 .env
+.venv/
+
+########################
+# Airflow
+########################
+airflow_env/
+airflow.db
+airflow.cfg
+logs/
+
+########################
+# Semana 4 – Monitoring
+########################
+statsd_exporter*
+*.tar.gz
+
+########################
+# Prometheus
+########################
+data/
+wal/
+
+########################
+# Grafana
+########################
+grafana.db
+
+########################
+# IDE / OS
+########################
+.vscode/
+.idea/
+.DS_Store
