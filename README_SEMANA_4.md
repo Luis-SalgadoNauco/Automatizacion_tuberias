@@ -379,9 +379,123 @@ Permite aprender del incidente, identificar causas raíz, definir acciones corre
 
 ---
 
+## Día 4 – Escalado, Versionado y Deploy sin Tiempo de Inactividad
+
+### Objetivo del día
+Comprender e implementar estrategias de escalado y versionado en tuberías de datos, junto con técnicas de despliegue sin tiempo de inactividad, asegurando continuidad operativa, compatibilidad de datos y alta disponibilidad en entornos productivos.
+
+---
+
+### Contenidos abordados
+
+#### 1. Estrategias de Escalado
+
+**Escalado vertical**
+- Incremento de CPU, memoria o disco en una misma máquina.
+- Implementación simple.
+- Limitado por el hardware.
+- Puede requerir tiempo de inactividad.
+
+**Escalado horizontal**
+- Uso de múltiples instancias en paralelo.
+- Mayor complejidad de coordinación.
+- Teóricamente ilimitado.
+- Permite actualizaciones sin downtime.
+
+**Aplicación en Airflow**
+- Uso de ejecutores distribuidos (CeleryExecutor).
+- Workers independientes para ejecución paralela de tareas.
+- Redis como broker de mensajes.
+
+Archivo asociado:
+- `semana_4/dia_4/escalado/docker-compose.scale.yml`
+
+---
+
+#### 2. Versionado de Datos y Esquemas
+
+Se implementó un gestor de versionado de datos que permite:
+
+- Validar datos contra múltiples versiones de esquema.
+- Mantener compatibilidad hacia atrás.
+- Realizar upgrades progresivos entre versiones.
+- Detectar errores de esquema antes de procesar datos.
+
+Versiones de esquema:
+- **v1**: id, name, created_at
+- **v2**: agrega email y updated_at
+- **v3**: agrega phone
+
+Archivo asociado:
+- `semana_4/dia_4/versionado/data_version_manager.py`
+
+Evidencia de ejecución:
+- Validación correcta de datos legacy.
+- Upgrade exitoso hasta versión 3.
+- Validación posterior sin errores.
+
+---
+
+#### 3. Deploy sin Tiempo de Inactividad (Zero Downtime)
+
+Se implementó una estrategia de despliegue tipo **blue-green**, que permite actualizar servicios sin interrumpir la operación.
+
+Flujo del deploy:
+1. Verificación de compatibilidad de datos.
+2. Preparación de nueva versión (green).
+3. Health checks.
+4. Ejecución de smoke tests.
+5. Cambio de tráfico a nueva versión.
+6. Eliminación de versión anterior (blue).
+
+Archivo asociado:
+- `semana_4/dia_4/deploy/deploy-zero-downtime.sh`
+
+Evidencia generada:
+- `evidencia_semana4/deploy_zero_downtime_dia4.txt`
+
+---
+
+### Evidencias del Día 4
+
+- `evidencia_semana4/deploy_zero_downtime_dia4.txt`
+- Ejecución exitosa del gestor de versionado de datos.
+- Validación y upgrade de esquemas sin errores.
+
+---
+
+### Preguntas de verificación
+
+**¿En qué situaciones preferirías escalar horizontalmente vs verticalmente?**
+
+El escalado horizontal es preferible cuando:
+- Se requiere alta disponibilidad y tolerancia a fallos.
+- El volumen de datos y la concurrencia crecen de forma impredecible.
+- Se necesita procesar múltiples tareas en paralelo (por ejemplo, múltiples DAGs o tareas simultáneas en Airflow).
+- Se busca evitar tiempos de inactividad durante ampliaciones de capacidad.
+
+El escalado vertical es más adecuado cuando:
+- La carga es predecible y estable.
+- Se prioriza una implementación simple y rápida.
+- No se requiere alta tolerancia a fallos.
+- El sistema aún no ha alcanzado los límites físicos del hardware.
+
+---
+
+**¿Cómo asegurar compatibilidad hacia atrás cuando cambias esquemas de datos?**
+
+La compatibilidad hacia atrás se asegura mediante:
+- Versionado explícito de esquemas de datos.
+- Adición de nuevos campos como opcionales, evitando eliminar o renombrar campos existentes.
+- Uso de valores por defecto o `null` para campos nuevos al procesar datos antiguos.
+- Implementación de funciones de migración progresiva que permitan actualizar datos de versiones anteriores.
+- Validaciones automáticas del esquema antes de procesar o desplegar cambios.
+
+Estas prácticas permiten que sistemas antiguos sigan funcionando mientras se introducen nuevas versiones del esquema sin interrumpir las operaciones.
+
+---
+
 ## Estructura del proyecto
-```text
-## Estructura del Proyecto
 
 ```text
 airflow_curso/
@@ -394,8 +508,17 @@ airflow_curso/
 │   └── dags/
 │       ├── test_dag_sintaxis.py
 │       └── test_pipeline_ventas.py
+├── semana_4/
+│   └── dia_4/
+│       ├── escalado/
+│       │   └── docker-compose.scale.yml
+│       ├── versionado/
+│       │   └── data_version_manager.py
+│       └── deploy/
+│           └── deploy-zero-downtime.sh
 ├── evidencia_semana4/
 │   ├── alertas_canalizacion_dia2.png
 │   ├── DashBoard_dia2.png
-│   └── Diagrama_ejecucion_dia2.png
+│   ├── Diagrama_ejecucion_dia2.png
+│   └── deploy_zero_downtime_dia4.txt
 └── .gitignore

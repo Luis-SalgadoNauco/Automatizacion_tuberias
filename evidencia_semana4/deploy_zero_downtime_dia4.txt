@@ -1,0 +1,15 @@
+Iniciando deployment zero-downtime
+Nueva versión: v1.0.1
+Paso 1: Verificando compatibilidad de datos
+Compatibilidad de esquemas verificada
+Paso 2: Preparando nueva versión (green)
+Entorno green preparado
+Paso 3: Ejecutando health checks
+Health checks OK
+Paso 4: Ejecutando smoke tests
+Smoke tests OK
+Paso 5: Cambiando tráfico a nueva versión
+Tráfico cambiado exitosamente
+Paso 6: Limpiando versión anterior
+Versión anterior eliminada
+Deployment zero-downtime completado
