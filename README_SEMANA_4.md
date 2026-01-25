@@ -495,6 +495,140 @@ Estas prácticas permiten que sistemas antiguos sigan funcionando mientras se in
 
 ---
 
+## Día 5 – Documentación Técnica y Comunicación Ejecutiva
+
+### Objetivo del día
+Aprender a tratar la documentación y la comunicación como un **producto profesional**, orientado a distintos públicos (técnico, negocio y ejecutivo), y no solo como un complemento del código.
+
+---
+
+### Contenidos abordados
+
+#### 1. Documentación técnica como producto
+La documentación deja de ser un requisito secundario y pasa a ser la **puerta de entrada** del proyecto.
+
+Se trabajó el concepto de README como:
+- Punto inicial para nuevos usuarios o stakeholders
+- Guía rápida de uso y contexto
+- Referencia técnica viva del sistema
+
+Estructura recomendada de un README profesional:
+- Propósito del negocio
+- Arquitectura de alto nivel
+- Quick Start
+- Guía de desarrollo
+- Troubleshooting común
+
+---
+
+#### 2. Código autodocumentado (Docstrings)
+Se revisó el uso de docstrings con estilo profesional (Google / NumPy Style) para:
+- Explicar **qué hace** el código, no solo **cómo**
+- Facilitar mantenimiento y escalabilidad
+- Permitir generación automática de documentación
+
+Aspectos clave:
+- Descripción clara de la función
+- Argumentos y tipos esperados
+- Valor de retorno
+- Posibles errores
+
+---
+
+#### 3. Storytelling para presentaciones ejecutivas
+Se trabajó la diferencia entre:
+- Explicar implementación técnica
+- Comunicar **valor de negocio**
+
+Framework utilizado: **SCQA**
+- Situación
+- Complicación
+- Pregunta
+- Respuesta
+
+El foco estuvo en presentar soluciones en términos de:
+- Ahorro de costos
+- Reducción de tiempos
+- Mitigación de riesgos
+- Impacto estratégico
+
+---
+
+#### 4. Jerarquía visual en presentaciones
+Buenas prácticas aplicadas:
+- Cada slide comunica una idea principal
+- Títulos con conclusiones, no genéricos
+- Visuales simples y orientados a impacto
+- Evitar sobrecarga de texto y gráficos
+
+Se reforzó que una presentación **acompaña al mensaje**, no lo reemplaza.
+
+---
+
+#### 5. Comunicación según audiencia
+Se analizó cómo traducir un mismo concepto técnico a distintos públicos:
+
+- Técnicos: precisión y detalle
+- Negocio: impacto operativo
+- Ejecutivos: valor estratégico y riesgo
+
+Ejemplos trabajados:
+- Refactorización
+- Rendimiento / latencia
+- Deuda técnica
+
+---
+
+### Ejercicio práctico del día
+
+#### Documentación técnica del pipeline ETL
+Se documentó el pipeline completo considerando:
+- Arquitectura general
+- Flujo de datos
+- Decisiones arquitectónicas
+- Escalabilidad, fiabilidad y mantenibilidad
+- Métricas de éxito
+- Manual operativo
+- Recuperación ante desastres
+
+---
+
+#### Presentación ejecutiva automatizada
+Se implementó un script en Python que:
+- Toma un resumen ejecutivo estructurado
+- Genera automáticamente una presentación `.pptx`
+- Produce slides orientadas a negocio y dirección
+
+El resultado es una **presentación ejecutiva reutilizable**, generada desde código.
+
+---
+
+#### Guía de adopción para usuarios de negocio
+Se creó documentación orientada a usuarios no técnicos:
+- Explicación del sistema en lenguaje simple
+- Uso de dashboards
+- Preguntas frecuentes
+- Canales de soporte
+
+---
+
+### Preguntas de verificación
+
+**¿Cómo adaptarías una presentación técnica para diferentes audiencias?**
+Adaptando el lenguaje, el nivel de detalle y el foco del mensaje:
+- Técnicos: implementación y decisiones técnicas
+- Negocio: impacto operativo y eficiencia
+- Ejecutivos: valor estratégico, riesgos y retorno
+
+**¿Qué elementos son más importantes en la documentación: código comentado, README o diagramas?**  
+Todos son importantes, pero cumplen roles distintos:
+- README: contexto y punto de entrada
+- Código comentado: mantenibilidad
+- Diagramas: entendimiento rápido del sistema
+La documentación efectiva combina los tres.
+
+---
+
 ## Estructura del proyecto
 
 ```text
@@ -514,8 +648,11 @@ airflow_curso/
 │       │   └── docker-compose.scale.yml
 │       ├── versionado/
 │       │   └── data_version_manager.py
-│       └── deploy/
-│           └── deploy-zero-downtime.sh
+│       ├── deploy/
+│       │   └── deploy-zero-downtime.sh
+│       └── presentacion/
+│           ├── generar_presentacion_ejecutiva.py
+│           └── presentacion_ejecutiva_dia4.pptx
 ├── evidencia_semana4/
 │   ├── alertas_canalizacion_dia2.png
 │   ├── DashBoard_dia2.png
