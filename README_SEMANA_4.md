@@ -36,9 +36,9 @@ Esta semana conecta el aprendizaje técnico con una **proyección profesional**,
 
 ---
 
-### Día 1 – Testing básico de DAGs en Apache Airflow
+## Día 1 – Testing básico de DAGs en Apache Airflow
 
-#### Objetivo del día
+### Objetivo del día
 
 - Comprender la importancia del testing en Airflow
 - Implementar pruebas básicas para validar DAGs
@@ -48,7 +48,7 @@ Esta semana conecta el aprendizaje técnico con una **proyección profesional**,
 
 ---
 
-#### Trabajo realizado
+### Trabajo realizado
 
 Durante el Día 1 se realizaron las siguientes actividades:
 
@@ -63,7 +63,7 @@ Durante el Día 1 se realizaron las siguientes actividades:
 
 ---
 
-#### Evidencia de ejecución – Día 1
+### Evidencia de ejecución – Día 1
 
 La ejecución de las pruebas arrojó los siguientes resultados:
 
@@ -75,9 +75,9 @@ Las evidencias correspondientes se encuentran almacenadas en la carpeta `evidenc
 
 ---
 
-#### Verificación – Día 1
+### Verificación – Día 1
 
-##### ¿Qué diferencias hay entre CI/CD para aplicaciones web vs pipelines de datos?
+#### ¿Qué diferencias hay entre CI/CD para aplicaciones web vs pipelines de datos?
 
 En aplicaciones web, los flujos de CI/CD suelen centrarse en:
 
@@ -95,7 +95,7 @@ En pipelines de datos con Apache Airflow:
 
 ---
 
-##### ¿Cómo asegurar que las pruebas de DAG sean rápidas y confiables?
+#### ¿Cómo asegurar que las pruebas de DAG sean rápidas y confiables?
 
 - Uso de `DagBag` sin ejecutar tareas
 - Evitar dependencias externas
@@ -105,9 +105,9 @@ En pipelines de datos con Apache Airflow:
 
 ---
 
-### Día 2 – Monitoreo, Observabilidad y Operación Profesional
+## Día 2 – Monitoreo, Observabilidad y Operación Profesional
 
-#### Objetivo del día
+### Objetivo del día
 
 - Comprender la importancia del monitoreo en pipelines de datos
 - Instrumentar DAGs con métricas personalizadas
@@ -118,7 +118,7 @@ En pipelines de datos con Apache Airflow:
 
 ---
 
-#### Trabajo realizado
+### Trabajo realizado
 
 Durante el Día 2 se realizaron las siguientes actividades:
 
@@ -136,35 +136,35 @@ Durante el Día 2 se realizaron las siguientes actividades:
 
 ---
 
-#### Métricas implementadas
+### Métricas implementadas
 
-##### Métricas del DAG
+#### Métricas del DAG
 - `airflow_pipeline_dag_success`
 - `airflow_pipeline_dag_failure`
 - `airflow_pipeline_dag_duration`
 
-##### Métricas de extracción
+#### Métricas de extracción
 - `airflow_pipeline_extract_records`
 - `airflow_pipeline_extract_duration`
 - `airflow_pipeline_extract_errors`
 
-##### Métricas de transformación
+#### Métricas de transformación
 - `airflow_pipeline_transform_quality`
 - `airflow_pipeline_transform_output_records`
 - `airflow_pipeline_transform_errors`
 
-##### Métricas de carga
+#### Métricas de carga
 - `airflow_pipeline_load_records_loaded`
 - `airflow_pipeline_load_duration`
 - `airflow_pipeline_load_throughput`
 - `airflow_pipeline_load_errors`
 
-##### Métricas de SLA
+#### Métricas de SLA
 - `airflow_pipeline_sla_violations`
 
 ---
 
-#### Dashboards configurados en Grafana
+### Dashboards configurados en Grafana
 
 Se implementó un dashboard de monitoreo con los siguientes paneles:
 
@@ -177,7 +177,7 @@ Estos dashboards permiten detectar problemas operativos y analizar el comportami
 
 ---
 
-#### Alertas configuradas en Prometheus
+### Alertas configuradas en Prometheus
 
 Se configuraron reglas de alerta para:
 
@@ -188,7 +188,7 @@ Las alertas fueron evaluadas correctamente y se encuentran en estado **OK** cuan
 
 ---
 
-#### Evidencia de ejecución – Día 2
+### Evidencia de ejecución – Día 2
 
 Se generaron evidencias que demuestran:
 
@@ -201,9 +201,9 @@ Las evidencias se encuentran almacenadas en la carpeta `evidencia/`.
 
 ---
 
-#### Verificación – Día 2
+### Verificación – Día 2
 
-##### ¿Qué métricas son más importantes para monitorear en una tubería de datos vs una aplicación web?
+#### ¿Qué métricas son más importantes para monitorear en una tubería de datos vs una aplicación web?
 
 Aunque tanto las aplicaciones web como las tuberías de datos utilizan principios similares de observabilidad, las métricas prioritarias difieren debido a la naturaleza de cada sistema.
 
@@ -232,7 +232,7 @@ Aquí el foco está en la **experiencia del usuario en tiempo real**, mientras q
 
 ---
 
-##### ¿Cómo decidir cuándo escalar de advertencia a crítica en las alertas?
+#### ¿Cómo decidir cuándo escalar de advertencia a crítica en las alertas?
 
 La severidad de una alerta debe definirse según el **impacto en el negocio** y no solo por la existencia de un error técnico.
 
@@ -265,61 +265,62 @@ Una buena práctica es:
 - Evitar alertas ruidosas que no requieren acción inmediata
 
 Este enfoque reduce la fatiga de alertas y garantiza que las alertas críticas representen incidentes reales que requieren intervención humana.
+
 ---
 
-### Día 3 – Gestión de Incidentes y Respuesta Operacional en Tuberías de Datos
+## Día 3 – Gestión de Incidentes y Respuesta Operacional en Tuberías de Datos
 
-#### Objetivo del día
+### Objetivo del día
 Identificar, responder y documentar incidentes comunes en tuberías de datos mediante prácticas reales de operación on-call, utilizando runbooks automatizados, recuperación controlada y post-mortems estructurados.
 
 ---
 
-#### Tarea 1: Tipos de Incidentes Comunes
+### Tarea 1: Tipos de Incidentes Comunes
 
 Durante la operación de una tubería de datos, los incidentes más frecuentes se agrupan en las siguientes categorías:
 
-##### 1. Fallos de conectividad
+#### 1. Fallos de conectividad
 - APIs caídas o no disponibles
 - Bases de datos inaccesibles
 - Timeouts de red
 - Límites de rate limit alcanzados
 - Problemas de autenticación o credenciales vencidas
 
-##### 2. Problemas de datos
+#### 2. Problemas de datos
 - Datos corruptos o con formato inválido
 - Cambios inesperados en esquemas
 - Volúmenes de datos que exceden la capacidad del sistema
 
-##### 3. Problemas de recursos
+#### 3. Problemas de recursos
 - Uso excesivo de memoria o CPU
 - Disco lleno o límites de almacenamiento alcanzados
 - Contención de recursos entre múltiples pipelines
 
-##### 4. Errores lógicos
+#### 4. Errores lógicos
 - Errores en el código de transformación
 - Dependencias circulares en DAGs
 - Configuraciones incorrectas
 
 ---
 
-#### Tarea 2: Estrategias de Recuperación – Runbook de Incidentes
+### Tarea 2: Estrategias de Recuperación – Runbook de Incidentes
 
 Se implementó un **runbook automatizado** para manejar incidentes de forma estructurada.
 
-##### Paso 1: Detección automática
+#### Paso 1: Detección automática
 Las alertas disparan el runbook cuando se cumplen condiciones como:
 - Pipeline caído
 - Violaciones de SLA
 - Alta tasa de errores
 - Datos desactualizados
 
-##### Paso 2: Diagnóstico rápido
+#### Paso 2: Diagnóstico rápido
 El diagnóstico se realiza según el tipo de incidente:
 - Verificación del scheduler de Airflow
 - Revisión de conectividad a la base de datos
 - Análisis de uso de CPU y memoria
 
-##### Paso 3: Recuperación automática
+#### Paso 3: Recuperación automática
 Dependiendo del diagnóstico, se ejecutan acciones como:
 - Reinicio de servicios
 - Escalado de recursos
@@ -330,7 +331,7 @@ Si la recuperación automática falla, el incidente se escala según su severida
 
 ---
 
-#### Simulación de Incidente
+### Simulación de Incidente
 
 Se simuló un incidente de tipo **`pipeline_down`**, ejecutando automáticamente:
 
@@ -346,11 +347,11 @@ Resultado:
 
 ---
 
-#### Tarea 3: Post-Mortem y Mejora Continua
+### Tarea 3: Post-Mortem y Mejora Continua
 
 Se generó un **post-mortem automático** en formato Markdown como evidencia del incidente.
 
-#### Contenido del post-mortem
+### Contenido del post-mortem
 - Executive Summary
 - Timeline del incidente
 - Impacto en usuarios y negocio
@@ -360,13 +361,13 @@ Se generó un **post-mortem automático** en formato Markdown como evidencia del
 - Acciones correctivas
 - Medidas de prevención
 
-#### Evidencia
+### Evidencia
 - Archivo generado: `post_mortem_pipeline_down.md`
 - Incluido en el repositorio como documentación formal del incidente
 
 ---
 
-#### Preguntas de verificación (Cierre del día)
+### Preguntas de verificación (Cierre del día)
 
 **1. ¿Cuál es la diferencia entre un incidente de datos y uno de infraestructura?**
 Un incidente de datos afecta la calidad, integridad o frescura de la información, mientras que uno de infraestructura impacta la disponibilidad o rendimiento de los sistemas.
@@ -379,16 +380,16 @@ Permite aprender del incidente, identificar causas raíz, definir acciones corre
 
 ---
 
-### Día 4 – Escalado, Versionado y Deploy sin Tiempo de Inactividad
+## Día 4 – Escalado, Versionado y Deploy sin Tiempo de Inactividad
 
-#### Objetivo del día
+### Objetivo del día
 Comprender e implementar estrategias de escalado y versionado en tuberías de datos, junto con técnicas de despliegue sin tiempo de inactividad, asegurando continuidad operativa, compatibilidad de datos y alta disponibilidad en entornos productivos.
 
 ---
 
-#### Contenidos abordados
+### Contenidos abordados
 
-##### 1. Estrategias de Escalado
+#### 1. Estrategias de Escalado
 
 **Escalado vertical**
 - Incremento de CPU, memoria o disco en una misma máquina.
@@ -412,7 +413,7 @@ Archivo asociado:
 
 ---
 
-##### 2. Versionado de Datos y Esquemas
+#### 2. Versionado de Datos y Esquemas
 
 Se implementó un gestor de versionado de datos que permite:
 
@@ -436,7 +437,7 @@ Evidencia de ejecución:
 
 ---
 
-##### 3. Deploy sin Tiempo de Inactividad (Zero Downtime)
+#### 3. Deploy sin Tiempo de Inactividad (Zero Downtime)
 
 Se implementó una estrategia de despliegue tipo **blue-green**, que permite actualizar servicios sin interrumpir la operación.
 
@@ -456,7 +457,7 @@ Evidencia generada:
 
 ---
 
-#### Evidencias del Día 4
+### Evidencias del Día 4
 
 - `evidencia_semana4/deploy_zero_downtime_dia4.txt`
 - Ejecución exitosa del gestor de versionado de datos.
@@ -464,7 +465,7 @@ Evidencia generada:
 
 ---
 
-#### Preguntas de verificación
+### Preguntas de verificación
 
 **¿En qué situaciones preferirías escalar horizontalmente vs verticalmente?**
 
@@ -495,16 +496,16 @@ Estas prácticas permiten que sistemas antiguos sigan funcionando mientras se in
 
 ---
 
-### Día 5 – Documentación Técnica y Comunicación Ejecutiva
+## Día 5 – Documentación Técnica y Comunicación Ejecutiva
 
-#### Objetivo del día
+### Objetivo del día
 Aprender a tratar la documentación y la comunicación como un **producto profesional**, orientado a distintos públicos (técnico, negocio y ejecutivo), y no solo como un complemento del código.
 
 ---
 
-#### Contenidos abordados
+### Contenidos abordados
 
-##### 1. Documentación técnica como producto
+#### 1. Documentación técnica como producto
 La documentación deja de ser un requisito secundario y pasa a ser la **puerta de entrada** del proyecto.
 
 Se trabajó el concepto de README como:
@@ -521,7 +522,7 @@ Estructura recomendada de un README profesional:
 
 ---
 
-##### 2. Código autodocumentado (Docstrings)
+#### 2. Código autodocumentado (Docstrings)
 Se revisó el uso de docstrings con estilo profesional (Google / NumPy Style) para:
 - Explicar **qué hace** el código, no solo **cómo**
 - Facilitar mantenimiento y escalabilidad
@@ -535,7 +536,7 @@ Aspectos clave:
 
 ---
 
-##### 3. Storytelling para presentaciones ejecutivas
+#### 3. Storytelling para presentaciones ejecutivas
 Se trabajó la diferencia entre:
 - Explicar implementación técnica
 - Comunicar **valor de negocio**
@@ -554,7 +555,7 @@ El foco estuvo en presentar soluciones en términos de:
 
 ---
 
-##### 4. Jerarquía visual en presentaciones
+#### 4. Jerarquía visual en presentaciones
 Buenas prácticas aplicadas:
 - Cada slide comunica una idea principal
 - Títulos con conclusiones, no genéricos
@@ -565,7 +566,7 @@ Se reforzó que una presentación **acompaña al mensaje**, no lo reemplaza.
 
 ---
 
-##### 5. Comunicación según audiencia
+#### 5. Comunicación según audiencia
 Se analizó cómo traducir un mismo concepto técnico a distintos públicos:
 
 - Técnicos: precisión y detalle
@@ -579,9 +580,9 @@ Ejemplos trabajados:
 
 ---
 
-#### Ejercicio práctico del día
+### Ejercicio práctico del día
 
-#### Documentación técnica del pipeline ETL
+### Documentación técnica del pipeline ETL
 Se documentó el pipeline completo considerando:
 - Arquitectura general
 - Flujo de datos
@@ -593,7 +594,7 @@ Se documentó el pipeline completo considerando:
 
 ---
 
-#### Presentación ejecutiva automatizada
+### Presentación ejecutiva automatizada
 Se implementó un script en Python que:
 - Toma un resumen ejecutivo estructurado
 - Genera automáticamente una presentación `.pptx`
@@ -603,7 +604,7 @@ El resultado es una **presentación ejecutiva reutilizable**, generada desde có
 
 ---
 
-#### Guía de adopción para usuarios de negocio
+### Guía de adopción para usuarios de negocio
 Se creó documentación orientada a usuarios no técnicos:
 - Explicación del sistema en lenguaje simple
 - Uso de dashboards
@@ -612,7 +613,7 @@ Se creó documentación orientada a usuarios no técnicos:
 
 ---
 
-#### Preguntas de verificación
+### Preguntas de verificación
 
 **¿Cómo adaptarías una presentación técnica para diferentes audiencias?**
 Adaptando el lenguaje, el nivel de detalle y el foco del mensaje:
